@@ -2,18 +2,24 @@
 
 namespace App\Http\Core;
 
-use Intervention\Image\Laravel\Facades\Image;
-
 class ImageManager
 {
-    public static function upload($file)
+    public static function  upload($file, $dir)
     {
-        $image = Image::read($file);
+        $imgName = \Illuminate\Support\Str::random(10) . time() . '.' . $file->getClientOriginalExtension();
+        $uploadLocation = public_path('upload/' . $dir . '/' . $imgName);
+        \Intervention\Image\Facades\Image::make($file)->save($uploadLocation);
+        return $imgName;
+    }
+    public static function patch()
+    {
+    }
 
-        return $image;
-        // $name = time() . time() . time() . '' . $file->getClientOriginalExtension();
-        // $dir = public_path('upload/profile/' . $name);
-        // Image::make($file)->save($dir);
-        // return $name;
+    public static function delete($dir, $file)
+    {
+        $path = public_path('upload/' . $dir . '/' . $file);
+        if (file_exists($path)) {
+            unlink($path);
+        }
     }
 }

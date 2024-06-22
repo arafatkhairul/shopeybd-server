@@ -4,7 +4,7 @@ import '../css/app.css';
 // import '../css/editor.css;
 
 import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
+import { Link, createInertiaApp, usePage } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { createPinia } from "pinia";
@@ -14,6 +14,9 @@ import Box from '@/components/Box.vue';
 import ActionMenu from '@/components/ActionMenu.vue';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import Input from './components/ui/input/Input.vue';
+import Label from './components/ui/label/Label.vue';
+import FormItem from '@/components/FormItem.vue';
 
 
 
@@ -31,11 +34,16 @@ createInertiaApp({
             .component('ActionMenu',ActionMenu)
             .component('ActionMenuItem',DropdownMenuItem)
             .component('Button',Button)
+            .component('Link',Link)
+            .component('Input',Input)
+            .component('Label',Label)
+            .component('FormItem', FormItem)
             .use(ZiggyVue)
             .use(createPinia())
             .mount(el);
     },
     progress: {
         color: 'red',
+        showSpinner:true
     },
 });
